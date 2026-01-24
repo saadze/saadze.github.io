@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Engineering portfolio — projects, links, and contact." />
+  <title>Your Name — Engineering Portfolio</title>
+
+  <style>
+    :root{
+      --bg: #0b0f17;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.09);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --faint: rgba(255,255,255,.45);
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --accent: #7dd3fc;
+      --accent2: #a78bfa;
+      --radius: 18px;
+      --max: 1050px;
+    --a1: 125 211 252; /* same as #7dd3fc */
+    --a2: 167 139 250; /* same as #a78bfa */
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root{
+        --bg: #f7f8fb;
+        --panel: rgba(0,0,0,.04);
+        --panel2: rgba(0,0,0,.06);
+        --text: rgba(0,0,0,.90);
+        --muted: rgba(0,0,0,.68);
+        --faint: rgba(0,0,0,.45);
+        --border: rgba(0,0,0,.10);
+        --shadow: 0 10px 30px rgba(0,0,0,.10);
+        --accent: #0369a1;
+        --accent2: #6d28d9;
+        --a1: 3 105 161;  /* same as #0369a1 */
+        --a2: 109 40 217; /* same as #6d28d9 */
+      }
+      
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+
+    body{
+        margin:0;
+        min-height: 100vh;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.55;
+        position: relative;
+        overflow-x: hidden;
+        }
+    /* One continuous, fixed background layer */
+    body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+
+    background:
+        /* soft cyan glow */
+        radial-gradient(1400px 900px at 18% -10%,
+        rgb(var(--a1) / 0.24) 0%,
+        rgb(var(--a1) / 0.14) 28%,
+        rgb(var(--a1) / 0.06) 48%,
+        transparent 72%),
+        /* soft purple glow */
+        radial-gradient(1400px 900px at 85% 0%,
+        rgb(var(--a2) / 0.22) 0%,
+        rgb(var(--a2) / 0.12) 30%,
+        rgb(var(--a2) / 0.05) 52%,
+        transparent 76%),
+        /* subtle mid-field blend so there’s no “gap” */
+        radial-gradient(1200px 900px at 50% 55%,
+        rgb(var(--a1) / 0.07) 0%,
+        transparent 68%),
+        /* gentle base depth */
+        linear-gradient(180deg,
+        rgba(255,255,255,0.02) 0%,
+        rgba(0,0,0,0.00) 40%,
+        rgba(0,0,0,0.10) 100%);
+
+    background-repeat: no-repeat;
+    }
+    /* Vignette to unify + make it feel continuous */
+    body::after{
+    content:"";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(1200px 800px at 50% 10%,
+        transparent 0%,
+        rgba(0,0,0,0.12) 60%,
+        rgba(0,0,0,0.22) 100%);
+    }
+
+    a{color:inherit}
+
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px 18px 24px;
+
+      /* Fix footer overlap + keep footer after content */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header{
+      margin-top: 18px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--panel2), var(--panel));
+      box-shadow: var(--shadow);
+    }
+
+    .hero{
+      display:flex; gap: 20px; align-items:center; justify-content:space-between;
+      flex-wrap: wrap;
+    }
+
+    .identity{display:flex; gap: 16px; align-items:center; min-width: 280px;}
+    .avatar{
+      width: 86px; height: 86px; border-radius: 999px; object-fit: cover;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.08);
+    }
+    h1{margin:0; font-size: 1.55rem; letter-spacing: .2px;}
+    .tagline{margin:.25rem 0 0; color: var(--muted); font-size: .98rem;}
+
+    .links{
+      display:flex; gap: 10px; flex-wrap: wrap; align-items:center; justify-content:flex-end;
+    }
+    .btn{
+      display:inline-flex; gap: 10px; align-items:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      text-decoration:none;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      font-size: .95rem;
+      color: var(--text);
+      cursor: pointer;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.18);}
+    .btn strong{font-weight:600}
+    .btn .sub{color: var(--muted); font-weight: 500;}
+
+    .meta{
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display:flex; gap: 14px; flex-wrap: wrap;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    .meta span{display:inline-flex; gap:8px; align-items:center}
+    .dot{width:6px; height:6px; border-radius:99px; background: var(--accent); display:inline-block; opacity:.85}
+
+    main{
+      margin-top: 26px;
+      flex: 1 0 auto; /* ensures footer stays after content */
+      padding-bottom: 18px;
+    }
+
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap: 12px;
+      margin: 6px 2px 14px;
+    }
+    .section-title h2{margin:0; font-size: 1.2rem;}
+    .section-title p{margin:0; color: var(--muted); font-size: .95rem}
+
+    .controls{
+      display:flex; gap: 10px; flex-wrap: wrap; align-items:center; justify-content:space-between;
+      margin: 10px 2px 18px;
+    }
+    .search{
+      flex: 1 1 260px;
+      display:flex; align-items:center; gap:10px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+    }
+    .search input{
+      width:100%;
+      border:0; outline:0;
+      background: transparent;
+      color: var(--text);
+      font-size: .95rem;
+    }
+    .pillbar{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+    .pill{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-size: .92rem;
+      cursor:pointer;
+      user-select:none;
+      transition: background .12s ease, border-color .12s ease, transform .12s ease;
+    }
+    .pill:hover{transform: translateY(-1px); border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.06);}
+    .pill.active{
+      color: var(--text);
+      border-color: rgba(125,211,252,.35);
+      background: rgba(125,211,252,.12);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    /* CARD */
+    .card{
+      grid-column: span 6;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      box-shadow: 0 10px 25px rgba(0,0,0,.18);
+      overflow:hidden;
+      transition: transform .14s ease, border-color .14s ease;
+      cursor: pointer; /* card is clickable */
+      outline: none;
+    }
+    .card:hover{transform: translateY(-2px); border-color: rgba(255,255,255,.18);}
+    .card:focus-visible{
+      box-shadow: 0 0 0 3px rgba(125,211,252,.25), 0 10px 25px rgba(0,0,0,.18);
+    }
+
+    .card-media{
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: rgba(255,255,255,.05);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+    }
+    .card-media img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.01);
+    }
+    .card-media::after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, transparent 40%, rgba(0,0,0,.35));
+      pointer-events:none;
+    }
+
+    .card-inner{padding: 14px 16px 16px;}
+    .card-top{display:flex; align-items:flex-start; justify-content:space-between; gap: 10px;}
+    .card h3{margin:0; font-size: 1.05rem;}
+    .when{color: var(--faint); font-size:.9rem; white-space:nowrap}
+    .desc{margin: 10px 0 0; color: var(--muted); font-size: .95rem;}
+
+    .badges{margin-top: 12px; display:flex; gap: 8px; flex-wrap:wrap;}
+    .badge{
+      font-size: .84rem;
+      padding: 6px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+    }
+
+    /* Single CTA on card */
+    .cta-row{
+      margin-top: 14px;
+      display:flex;
+      justify-content: flex-start;
+    }
+    .see-more{
+      border: 1px solid rgba(125,211,252,.35);
+      background: rgba(125,211,252,.12);
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+    }
+    .see-more:hover{
+      transform: translateY(-1px);
+      border-color: rgba(125,211,252,.55);
+      background: rgba(125,211,252,.16);
+    }
+
+    .muted-note{margin-top: 18px; color: var(--muted); font-size: .95rem}
+
+    footer{
+      flex-shrink: 0;
+      margin-top: auto; /* keeps footer at bottom when content is short */
+      color: var(--faint);
+      font-size: .92rem;
+      display:flex; justify-content:space-between; gap: 10px; flex-wrap: wrap;
+      padding: 16px 2px 8px;
+    }
+
+    @media (max-width: 900px){
+      .card{grid-column: span 12;}
+      .links{justify-content:flex-start}
+    }
+
+    /* MODAL */
+    .modal{
+      position: fixed;
+      inset: 0;
+      display: none;
+      z-index: 999;
+    }
+    .modal.open{display:block;}
+
+    .modal-backdrop{
+      position:absolute; inset:0;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+    }
+
+    .modal-panel{
+      position: relative;
+      width: min(980px, calc(100vw - 24px));
+      max-height: calc(100vh - 24px);
+      margin: 12px auto;
+      border-radius: 22px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--panel2), var(--panel));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      animation: pop .14s ease-out;
+    }
+
+    @keyframes pop{
+      from{transform: translateY(6px); opacity:.92;}
+      to{transform: translateY(0); opacity:1;}
+    }
+
+    .modal-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 18px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-title{
+      margin:0;
+      font-size: 1.2rem;
+      line-height: 1.25;
+    }
+    .modal-sub{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    .modal-close{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .modal-close:hover{border-color: rgba(255,255,255,.18); background: rgba(255,255,255,.08);}
+
+    .modal-scroll{
+      padding: 16px 18px 18px;
+      overflow: auto;            /* scrollable popup */
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .modal-actions{
+      margin-top: 10px;
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .action{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      border-radius: 14px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .action:hover{
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.09);
+    }
+    .action.primary{
+      border-color: rgba(125,211,252,.40);
+      background: rgba(125,211,252,.14);
+    }
+    .action.primary:hover{
+      border-color: rgba(125,211,252,.60);
+      background: rgba(125,211,252,.18);
+    }
+
+    .modal-section{
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .modal-section h4{
+      margin: 0 0 8px;
+      font-size: 1.0rem;
+    }
+    .modal-section p{
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .gallery{
+      margin-top: 12px;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 10px;
+    }
+    .gallery figure{
+      grid-column: span 6;
+      margin:0;
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.04);
+    }
+    .gallery img{
+      width:100%;
+      height: 220px;
+      object-fit: cover;
+      display:block;
+    }
+    .gallery figcaption{
+      padding: 10px 10px 11px;
+      font-size: .9rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+    @media (max-width: 900px){
+      .gallery figure{grid-column: span 12;}
+      .gallery img{height: 200px;}
+    }
+
+    .ico{width:16px; height:16px; opacity:.9}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <div class="hero">
+        <div class="identity">
+          <img class="avatar" src="assets/profile.jpg" alt="Portrait of Your Name" />
+          <div>
+            <h1>Your Name</h1>
+            <p class="tagline">Engineering • Robotics / Embedded / Software (edit this)</p>
+          </div>
+        </div>
+
+        <div class="links" aria-label="Contact links">
+          <a class="btn" href="assets/cv.pdf" target="_blank" rel="noopener">
+            <strong>CV</strong><span class="sub">PDF</span>
+          </a>
+          <a class="btn" href="mailto:you@email.com">
+            <strong>Email</strong><span class="sub">you@email.com</span>
+          </a>
+          <a class="btn" href="https://github.com/yourhandle" target="_blank" rel="noopener">
+            <strong>GitHub</strong><span class="sub">@yourhandle</span>
+          </a>
+          <a class="btn" href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">
+            <strong>LinkedIn</strong><span class="sub">Profile</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="meta" aria-label="Quick info">
+        <span><i class="dot"></i> Paris, FR (edit)</span>
+        <span><i class="dot"></i> Open to: Internships / Full-time (edit)</span>
+        <span><i class="dot"></i> Interests: Controls, Embedded, ML (edit)</span>
+      </div>
+    </header>
+
+    <main id="projects">
+      <div class="section-title">
+        <h2>Projects</h2>
+        <p>Filter, or just scroll.</p>
+      </div>
+
+      <div class="controls">
+        <div class="pillbar" aria-label="Tag filters" id="pillbar"></div>
+     </div>
+
+      <section class="grid" id="grid" aria-label="Project list"></section>
+
+    </main>
+
+    <footer>
+      <span>© <span id="year"></span> Your Name</span>
+      <span>Hosted on GitHub Pages</span>
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal-backdrop" id="modalBackdrop" aria-hidden="true"></div>
+
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <h3 class="modal-title" id="modalTitle">Project title</h3>
+          <p class="modal-sub" id="modalSub">Project subtitle</p>
+          <div class="modal-actions" id="modalActions"></div>
+        </div>
+        <button class="modal-close" id="modalClose" type="button">Close</button>
+      </div>
+
+      <div class="modal-scroll" id="modalScroll">
+        <div class="modal-section">
+          <h4>Overview</h4>
+          <p id="modalOverview"></p>
+        </div>
+
+        <div class="modal-section" id="modalDetailsWrap" style="display:none;">
+          <h4>Details</h4>
+          <div id="modalDetails"></div>
+        </div>
+
+        <div class="modal-section" id="modalGalleryWrap" style="display:none;">
+          <h4>Gallery</h4>
+          <div class="gallery" id="modalGallery"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================
+    // EDIT YOUR PROJECTS HERE
+    // =========================
+    const projects = [
+      {
+        title: "Autonomous Line-Following Robot",
+        date: "2025",
+        short: "PID control, sensor fusion, and a custom PCB for reliable signal conditioning.",
+        overview: "Designed and built an autonomous line-following robot with tuned PID loops, robust sensor processing, and an integrated electronics stack. Focused on repeatability, calibration workflow, and measurable performance.",
+        details: [
+          "Control: PID tuning + anti-windup; tested across multiple track geometries.",
+          "Electronics: custom PCB for sensor conditioning and motor driver integration.",
+          "Validation: logged lap time variance and error metrics; iterated on sensor mounting."
+        ],
+        tags: ["Robotics", "Embedded", "Control"],
+
+        // Image shown on the card (add your own assets)
+        cover: "assets/projects/line-follower/cover.jpg",
+
+        // Images shown in the popup (add as many as you want)
+        gallery: [
+          { src: "assets/projects/line-follower/01.jpg", alt: "Robot on track", caption: "Prototype on test track." },
+          { src: "assets/projects/line-follower/02.jpg", alt: "PCB close-up", caption: "Custom PCB revision B." }
+        ],
+
+        // Buttons inside the modal
+        links: [
+          { label: "Repository", href: "https://github.com/yourhandle/line-follower", primary: true },
+          { label: "Report", href: "assets/projects/line-follower/report.pdf" }
+        ]
+      },
+      {
+        title: "Finite Element Beam Solver",
+        date: "2024",
+        short: "Euler–Bernoulli FEM solver validated against analytical solutions; includes a small CLI.",
+        overview: "Implemented an Euler–Bernoulli beam FEM solver, with configurable boundary conditions and load cases. Validated against closed-form solutions and documented numerical convergence.",
+        details: [
+          "Implemented element stiffness assembly, global solve, and post-processing for deflection/stress.",
+          "Added CLI for scripted runs and parameter sweeps.",
+          "Benchmarked convergence and compared against analytical baselines."
+        ],
+        tags: ["Simulation", "Python", "Mechanics"],
+        cover: "assets/projects/fem-beam/cover.jpg",
+        gallery: [
+          { src: "assets/projects/fem-beam/01.jpg", alt: "Plot of deflection", caption: "Deflection curve vs analytical." },
+          { src: "assets/projects/fem-beam/02.jpg", alt: "CLI screenshot", caption: "CLI workflow for parameter sweeps." }
+        ],
+        links: [
+          { label: "Repository", href: "https://github.com/yourhandle/fem-beam", primary: true },
+          { label: "Demo", href: "https://yourhandle.github.io/fem-beam-demo/" }
+        ]
+      },
+      {
+        title: "IoT Vibration Monitoring Node",
+        date: "2024",
+        short: "Low-power BLE telemetry + local FFT feature extraction for anomaly detection.",
+        overview: "Built a low-power vibration sensing node for condition monitoring. Implemented local FFT-based feature extraction and BLE telemetry for periodic reporting and diagnostics.",
+        details: [
+          "Firmware optimized for duty-cycled sampling and transmission.",
+          "Feature pipeline: windowing + FFT + bandpower features.",
+          "Field tests: compared signatures across operating regimes."
+        ],
+        tags: ["IoT", "Embedded", "Signal Processing"],
+        cover: "assets/projects/vibration-node/cover.jpg",
+        gallery: [
+          { src: "assets/projects/vibration-node/01.jpg", alt: "Node enclosure", caption: "Enclosure + mounting setup." }
+        ],
+        links: [
+          { label: "Repository", href: "https://github.com/yourhandle/vibration-node", primary: true }
+        ]
+      }
+    ];
+
+    // =========
+    // Helpers
+    // =========
+    const $grid = document.getElementById("grid");
+    const $pillbar = document.getElementById("pillbar");
+
+    const $modal = document.getElementById("modal");
+    const $modalBackdrop = document.getElementById("modalBackdrop");
+    const $modalClose = document.getElementById("modalClose");
+    const $modalTitle = document.getElementById("modalTitle");
+    const $modalSub = document.getElementById("modalSub");
+    const $modalActions = document.getElementById("modalActions");
+    const $modalOverview = document.getElementById("modalOverview");
+    const $modalDetailsWrap = document.getElementById("modalDetailsWrap");
+    const $modalDetails = document.getElementById("modalDetails");
+    const $modalGalleryWrap = document.getElementById("modalGalleryWrap");
+    const $modalGallery = document.getElementById("modalGallery");
+    const $modalScroll = document.getElementById("modalScroll");
+
+    const escapeHtml = (s="") => String(s)
+      .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+
+    // =========
+    // Tags
+    // =========
+    const allTags = Array.from(new Set(projects.flatMap(p => p.tags || [])))
+      .sort((a,b) => a.localeCompare(b));
+
+    let activeTag = "All";
+
+    function renderPills() {
+      const tags = ["All", ...allTags];
+      $pillbar.innerHTML = tags.map(t => `
+        <button class="pill ${t===activeTag ? "active":""}" data-tag="${escapeHtml(t)}" type="button">
+          ${escapeHtml(t)}
+        </button>
+      `).join("");
+
+      $pillbar.querySelectorAll("button").forEach(btn => {
+        btn.addEventListener("click", () => {
+          activeTag = btn.dataset.tag;
+          renderPills();
+          renderGrid();
+        });
+      });
+    }
+
+    function matches(project, query) {
+      const q = query.trim().toLowerCase();
+      if (!q) return true;
+      const hay = [
+        project.title, project.short, project.overview,
+        ...(project.details || []).join(" "),
+        ...(project.tags || [])
+      ].join(" ").toLowerCase();
+      return hay.includes(q);
+    }
+
+    function tagOk(project) {
+      if (activeTag === "All") return true;
+      return (project.tags || []).includes(activeTag);
+    }
+
+    // =========
+    // Modal
+    // =========
+    let lastFocusedEl = null;
+
+    function openModal(project) {
+      lastFocusedEl = document.activeElement;
+
+      $modalTitle.textContent = project.title;
+      $modalSub.textContent = project.date ? `${project.date} • ${project.tags?.join(" • ") || ""}` : (project.tags?.join(" • ") || "");
+      $modalOverview.textContent = project.overview || project.short || "";
+
+      // Actions (buttons) inside modal
+      const links = project.links || [];
+      $modalActions.innerHTML = links.map(l => `
+        <a class="action ${l.primary ? "primary" : ""}" href="${escapeHtml(l.href)}" target="_blank" rel="noopener">
+          ${escapeHtml(l.label)}
+        </a>
+      `).join("");
+
+      // Details
+      const details = project.details || [];
+      if (details.length) {
+        $modalDetailsWrap.style.display = "";
+        $modalDetails.innerHTML = `<ul style="margin:0; padding-left: 18px; color: var(--muted);">
+          ${details.map(d => `<li style="margin: 6px 0;">${escapeHtml(d)}</li>`).join("")}
+        </ul>`;
+      } else {
+        $modalDetailsWrap.style.display = "none";
+        $modalDetails.innerHTML = "";
+      }
+
+      // Gallery
+      const gallery = project.gallery || [];
+      if (gallery.length) {
+        $modalGalleryWrap.style.display = "";
+        $modalGallery.innerHTML = gallery.map(img => `
+          <figure>
+            <img src="${escapeHtml(img.src)}" alt="${escapeHtml(img.alt || project.title)}" loading="lazy" />
+            ${img.caption ? `<figcaption>${escapeHtml(img.caption)}</figcaption>` : ""}
+          </figure>
+        `).join("");
+      } else {
+        $modalGalleryWrap.style.display = "none";
+        $modalGallery.innerHTML = "";
+      }
+
+      // reset scroll
+      $modalScroll.scrollTop = 0;
+
+      $modal.classList.add("open");
+      $modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden"; // prevent background scrolling
+
+      // focus close for accessibility
+      $modalClose.focus();
+    }
+
+    function closeModal() {
+      $modal.classList.remove("open");
+      $modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+
+      if (lastFocusedEl && typeof lastFocusedEl.focus === "function") {
+        lastFocusedEl.focus();
+      }
+    }
+
+    $modalClose.addEventListener("click", closeModal);
+    $modalBackdrop.addEventListener("click", closeModal);
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && $modal.classList.contains("open")) closeModal();
+    });
+
+    // =========
+    // Grid render
+    // =========
+    function renderGrid() {
+      const query = "";
+      const filtered = projects
+        .map((p, idx) => ({...p, __idx: idx}))
+        .filter(p => matches(p, query) && tagOk(p));
+
+      if (!filtered.length) {
+        $grid.innerHTML = `<div class="card" style="grid-column: span 12; cursor: default;">
+          <div class="card-inner">
+            <h3>No projects found</h3>
+            <p class="desc">Try a different search term or clear the filter.</p>
+          </div>
+        </div>`;
+        return;
+      }
+
+      $grid.innerHTML = filtered.map(p => `
+        <article class="card" tabindex="0" role="button"
+          data-idx="${p.__idx}"
+          aria-label="Open details for ${escapeHtml(p.title)}">
+
+          <div class="card-media">
+            <img src="${escapeHtml(p.cover || "")}" alt="${escapeHtml(p.title)} cover image" loading="lazy" />
+          </div>
+
+          <div class="card-inner">
+            <div class="card-top">
+              <h3>${escapeHtml(p.title)}</h3>
+              <div class="when">${escapeHtml(p.date || "")}</div>
+            </div>
+
+            <p class="desc">${escapeHtml(p.short || "")}</p>
+
+            <div class="badges" aria-label="Project tags">
+              ${(p.tags || []).map(t => `<span class="badge">${escapeHtml(t)}</span>`).join("")}
+            </div>
+
+            <div class="cta-row">
+              <button class="see-more" type="button" aria-label="See more about ${escapeHtml(p.title)}">See more</button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+
+      // Attach open handlers
+      $grid.querySelectorAll(".card").forEach(card => {
+        const idx = Number(card.dataset.idx);
+
+        const open = () => openModal(projects[idx]);
+
+        card.addEventListener("click", (e) => {
+          // If click is on the button, still open modal (no separate behavior needed)
+          open();
+        });
+
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            open();
+          }
+        });
+
+        // prevent button from double-triggering weirdness in some browsers
+        const btn = card.querySelector(".see-more");
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          open();
+        });
+      });
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    renderPills();
+    renderGrid();
+  </script>
+</body>
+</html>
