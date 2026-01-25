@@ -564,16 +564,16 @@
     // =========================
     const projects = [
       {
-        title: "Autonomous Line-Following Robot",
-        date: "2025",
-        short: "PID control, sensor fusion, and a custom PCB for reliable signal conditioning.",
+        title: "Flightory Stallion UAV",
+        date: "2026",
+        short: "Electric 3D printed model aircraft with 1.6 meters of wingspan. Used the basic Stallion from the internet and integrated a new landing gear and improved tail boom.",
         overview: "Designed and built an autonomous line-following robot with tuned PID loops, robust sensor processing, and an integrated electronics stack. Focused on repeatability, calibration workflow, and measurable performance.",
         details: [
           "Control: PID tuning + anti-windup; tested across multiple track geometries.",
           "Electronics: custom PCB for sensor conditioning and motor driver integration.",
           "Validation: logged lap time variance and error metrics; iterated on sensor mounting."
         ],
-        tags: ["Robotics", "Embedded", "Control"],
+        tags: ["UAV", "3D Printing", "Aircraft Design"],
 
         // Image shown on the card (add your own assets)
         cover: "./assets/FLL/FIRST Lego League.avif",
@@ -591,8 +591,8 @@
         ]
       },
       {
-        title: "Finite Element Beam Solver",
-        date: "2024",
+        title: "Portable 3-axis milling machine",
+        date: "2023",
         short: "Euler–Bernoulli FEM solver validated against analytical solutions; includes a small CLI.",
         overview: "Implemented an Euler–Bernoulli beam FEM solver, with configurable boundary conditions and load cases. Validated against closed-form solutions and documented numerical convergence.",
         details: [
@@ -612,8 +612,65 @@
         ]
       },
       {
-        title: "IoT Vibration Monitoring Node",
+        title: "Floating Building",
         date: "2024",
+        short: "Low-power BLE telemetry + local FFT feature extraction for anomaly detection.",
+        overview: "Built a low-power vibration sensing node for condition monitoring. Implemented local FFT-based feature extraction and BLE telemetry for periodic reporting and diagnostics.",
+        details: [
+          "Firmware optimized for duty-cycled sampling and transmission.",
+          "Feature pipeline: windowing + FFT + bandpower features.",
+          "Field tests: compared signatures across operating regimes."
+        ],
+        tags: ["IoT", "Embedded", "Signal Processing"],
+        cover: "./assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png",
+        gallery: [
+          { src: "assets/projects/vibration-node/01.jpg", alt: "Node enclosure", caption: "Enclosure + mounting setup." }
+        ],
+        links: [
+          { label: "Repository", href: "https://github.com/yourhandle/vibration-node", primary: true }
+        ]
+      },
+      {
+        title: "Bi-copter arm instrumentation & stabilization",
+        date: "2025",
+        short: "Low-power BLE telemetry + local FFT feature extraction for anomaly detection.",
+        overview: "Built a low-power vibration sensing node for condition monitoring. Implemented local FFT-based feature extraction and BLE telemetry for periodic reporting and diagnostics.",
+        details: [
+          "Firmware optimized for duty-cycled sampling and transmission.",
+          "Feature pipeline: windowing + FFT + bandpower features.",
+          "Field tests: compared signatures across operating regimes."
+        ],
+        tags: ["IoT", "Embedded", "Signal Processing"],
+        cover: "./assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png",
+        gallery: [
+          { src: "assets/projects/vibration-node/01.jpg", alt: "Node enclosure", caption: "Enclosure + mounting setup." }
+        ],
+        links: [
+          { label: "Repository", href: "https://github.com/yourhandle/vibration-node", primary: true }
+        ]
+      },
+      {
+        title: "Ansys Ideathon winner",
+        date: "2024",
+        short: "Low-power BLE telemetry + local FFT feature extraction for anomaly detection.",
+        overview: "Built a low-power vibration sensing node for condition monitoring. Implemented local FFT-based feature extraction and BLE telemetry for periodic reporting and diagnostics.",
+        details: [
+          "Firmware optimized for duty-cycled sampling and transmission.",
+          "Feature pipeline: windowing + FFT + bandpower features.",
+          "Field tests: compared signatures across operating regimes."
+        ],
+        tags: ["IoT", "Embedded", "Signal Processing"],
+        cover: "./assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png",
+        gallery: [
+          { src: "assets/projects/vibration-node/01.jpg", alt: "Node enclosure", caption: "Enclosure + mounting setup." }
+        ],
+        links: [
+          { label: "Repository", href: "https://github.com/yourhandle/vibration-node", primary: true }
+        ]
+      },
+      {
+        title: "FIRST Lego League winner",
+        date: "2016 - 2019",
         short: "Low-power BLE telemetry + local FFT feature extraction for anomaly detection.",
         overview: "Built a low-power vibration sensing node for condition monitoring. Implemented local FFT-based feature extraction and BLE telemetry for periodic reporting and diagnostics.",
         details: [
