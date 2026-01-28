@@ -200,7 +200,7 @@
       color: var(--text);
       font-size: .95rem;
     }
-    .pillbar{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+    .pillbar{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-start}
     .pill{
       border: 1px solid var(--border);
       background: rgba(255,255,255,.04);
@@ -508,7 +508,6 @@
     <main id="projects">
       <div class="section-title">
         <h2>Projects</h2>
-        <p>Filter, or just scroll.</p>
       </div>
 
       <div class="controls">
@@ -566,17 +565,17 @@
       {
         title: "Flightory Stallion UAV",
         date: "2026",
-        short: "Electric 3D printed model aircraft with 1.6 meters of wingspan. Used the basic Stallion from the internet and integrated a new landing gear and improved tail boom.",
-        overview: "Designed and built an autonomous line-following robot with tuned PID loops, robust sensor processing, and an integrated electronics stack. Focused on repeatability, calibration workflow, and measurable performance.",
+        short: "Electric 3D printed model aircraft with 1.6 meters of wingspan and speed up to 70 km/h.",
+        overview: "This project is based on the 3D model of the Stallion by flightory. It involved 3D printing all the parts from the pre-existing model, setting up the electronics, programming them, and designing new parts for added features. For instance, I integrated a new landing gear and improved tail boom",
         details: [
-          "Control: PID tuning + anti-windup; tested across multiple track geometries.",
-          "Electronics: custom PCB for sensor conditioning and motor driver integration.",
-          "Validation: logged lap time variance and error metrics; iterated on sensor mounting."
+          "GPS navigation and autonomous flight using Ardupilot and Speedybee f405 flight controller.",
+          "CAD and simulation to design and optimize improved parts",
+          "3D printing slicing and improvement of part weight"
         ],
-        tags: ["UAV", "3D Printing", "Aircraft Design"],
+        tags: ["UAV", "3D printing", "Aircraft Design", "CAD"],
 
         // Image shown on the card (add your own assets)
-        cover: "./assets/FLL/FIRST Lego League.avif",
+        cover: "./assets/Stallion/DSC4213.jpg",
 
         // Images shown in the popup (add as many as you want)
         gallery: [
@@ -593,15 +592,16 @@
       {
         title: "Portable 3-axis milling machine",
         date: "2023",
-        short: "Euler–Bernoulli FEM solver validated against analytical solutions; includes a small CLI.",
-        overview: "Implemented an Euler–Bernoulli beam FEM solver, with configurable boundary conditions and load cases. Validated against closed-form solutions and documented numerical convergence.",
+        short: "In a group of 12 people, we wrote the specifications, designed, machined, and assembled a 3 axis desktop milling machine.",
+        overview: "Over 6 months, we worked in 2 competition teams to make the best 3 axis desktop milling machine. Our goal was to come up with the detailed specifications ourselves, design, and build a prototype from scratch. This was one of my favorite projects in the past few years !s",
         details: [
-          "Implemented element stiffness assembly, global solve, and post-processing for deflection/stress.",
-          "Added CLI for scripted runs and parameter sweeps.",
-          "Benchmarked convergence and compared against analytical baselines."
+          "Defined clear technical specifications for our milling machine, starting from a 1 pager from the project supervisor",
+          "Designed all the parts for turning, machining and sheet metal.",
+          "Handled workshop production scheduling and numerical turning machine programming",
+          "Project coordination and management: I took the lead on managing multiple phases of the projects which required planning, people management, and handling unexpected events / delays."
         ],
-        tags: ["Simulation", "Python", "Mechanics"],
-        cover: "./assets/Stallion/DSC4213.jpg",
+        tags: ["CAD", "Machining", "3D printing", "Management"],
+        cover: "./assets/FLL/FIRST Lego League.avif",
         gallery: [
           { src: "assets/projects/fem-beam/01.jpg", alt: "Plot of deflection", caption: "Deflection curve vs analytical." },
           { src: "assets/projects/fem-beam/02.jpg", alt: "CLI screenshot", caption: "CLI workflow for parameter sweeps." }
@@ -621,7 +621,7 @@
           "Feature pipeline: windowing + FFT + bandpower features.",
           "Field tests: compared signatures across operating regimes."
         ],
-        tags: ["IoT", "Embedded", "Signal Processing"],
+        tags: ["Laser cutting", "3D printing"],
         cover: "./assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png",
         gallery: [
           { src: "assets/projects/vibration-node/01.jpg", alt: "Node enclosure", caption: "Enclosure + mounting setup." }
@@ -640,7 +640,7 @@
           "Feature pipeline: windowing + FFT + bandpower features.",
           "Field tests: compared signatures across operating regimes."
         ],
-        tags: ["IoT", "Embedded", "Signal Processing"],
+        tags: ["Arduino", "MATLAB"],
         cover: "./assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png",
         gallery: [
           { src: "assets/projects/vibration-node/01.jpg", alt: "Node enclosure", caption: "Enclosure + mounting setup." }
@@ -659,7 +659,7 @@
           "Feature pipeline: windowing + FFT + bandpower features.",
           "Field tests: compared signatures across operating regimes."
         ],
-        tags: ["IoT", "Embedded", "Signal Processing"],
+        tags: ["Life Cycle Analysis", "Simulation"],
         cover: "./assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png",
         gallery: [
           { src: "assets/projects/vibration-node/01.jpg", alt: "Node enclosure", caption: "Enclosure + mounting setup." }
@@ -678,7 +678,7 @@
           "Feature pipeline: windowing + FFT + bandpower features.",
           "Field tests: compared signatures across operating regimes."
         ],
-        tags: ["IoT", "Embedded", "Signal Processing"],
+        tags: ["Robotics"],
         cover: "./assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png",
         gallery: [
           { src: "assets/projects/vibration-node/01.jpg", alt: "Node enclosure", caption: "Enclosure + mounting setup." }
