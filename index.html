@@ -9,7 +9,7 @@
   <style>
     :root{
       --bg: #0b0f17;
-      --panel: rgba(255,255,255,.06);
+      --panel: rgba(255,255,255,.07);
       --panel2: rgba(255,255,255,.09);
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.70);
@@ -27,7 +27,7 @@
     @media (prefers-color-scheme: light) {
       :root{
         --bg: #f7f8fb;
-        --panel: rgba(0,0,0,.04);
+        --panel: rgba(0,0,0,.05);
         --panel2: rgba(0,0,0,.06);
         --text: rgba(0,0,0,.90);
         --muted: rgba(0,0,0,.68);
@@ -330,8 +330,8 @@
 
     .modal-backdrop{
       position:absolute; inset:0;
-      background: rgba(0,0,0,.55);
-      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,.70);
+      backdrop-filter: blur(10px);
     }
 
     .modal-panel{
@@ -694,13 +694,16 @@
       {
         title: "Bi-copter arm instrumentation & stabilization",
         date: "2025",
-        short: "Low-power BLE telemetry + local FFT feature extraction for anomaly detection.",
-        overview: "Built a low-power vibration sensing node for condition monitoring. Implemented local FFT-based feature extraction and BLE telemetry for periodic reporting and diagnostics.",
+        short: "Modeled and stabilized a bi-rotor drone arm using Lagrangian dynamics, Simulink simulation, and Arduino IMU feedback.",
+        overview: "This project focused on stabilizing the pitch of a bi-rotor experimental drone arm using only an onboard IMU (3-axis accelerometer + 3-axis gyroscope). :contentReference[oaicite:0]{index=0} I derived the system dynamics with Lagrangian mechanics and built a Simulink model to validate behavior and guide controller design. On the embedded side, I implemented the real-time control loop on Arduino with an MPU-6050, including sensor calibration and state estimation (Kalman filtering) to obtain a robust attitude estimate. I wrote most of the code and validated the stabilization experimentally; a video demo is available via the project link.",
         details: [
-          "Firmware optimized for duty-cycled sampling and transmission.",
-          "Feature pipeline: windowing + FFT + bandpower features.",
-          "Field tests: compared signatures across operating regimes."
+          "Derived the dynamic model using Lagrangian mechanics and validated it in Simulink",
+          "Built the Arduino acquisition pipeline for the MPU-6050 (calibration, filtering, and angle estimation)",
+          "Implemented a real-time stabilization loop (PID control) based on IMU feedback",
+          "Applied Kalman filtering for sensor fusion and improved attitude estimation robustness",
+          "Tested and tuned the controller experimentally; results documented with a video demonstration"
         ],
+
         tags: ["Arduino", "MATLAB"],
         cover: "assets/bi-copter/WhatsApp Image 2026-02-03 at 15.12.28 (4).jpeg",
         gallery: [
@@ -709,50 +712,53 @@
           { src: "assets/bi-copter/WhatsApp Image 2026-02-03 at 15.12.28 (3).jpeg", alt: "Example of results achieved vs target", caption: "Example of results achieved vs target" }
         ],
         links: [
-          { label: "C++ Code repository", href: "https://github.com/saadze/gm3_PIAE", primary: true }
+          { label: "C++ Code repository", href: "https://github.com/saadze/gm3_PIAE", primary: true },
+          { label: "Youtube Video of the Arm", href: "https://www.youtube.com/shorts/G7McC9TaHUU", primary: false },
+          { label: "Presentation Link", href: "https://www.canva.com/design/DAGngDodwh4/-NC_xeX52PjOkln2GSQV9Q/edit?utm_content=DAGngDodwh4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton", primary: false }
         ]
       },
       {
         title: "Floating Building",
         date: "2024",
-        short: "Low-power BLE telemetry + local FFT feature extraction for anomaly detection.",
-        overview: "Built a low-power vibration sensing node for condition monitoring. Implemented local FFT-based feature extraction and BLE telemetry for periodic reporting and diagnostics.",
+        short: "Eco-design feasibility study for a low-carbon floating apartment building.",
+        overview: "In this scientific and technical project, we conducted a feasibility study for a floating apartment building intended for a floating district in IJburg (Amsterdam). The objective was to design a realistic, low-carbon solution while ensuring flotation, static stability, structural integrity, habitability, and environmental relevance. We built a Python model to evaluate buoyancy and restoring stability through mass distribution and draft calculations, validated key parameters with scaled experiments, and designed the building in CAD. We also selected a low-impact structural material using the Ashby method, then compared its life-cycle impact against a conventional concrete solution using Granta EduPack. Finally, we produced a detailed 1:100 prototype and confirmed that it reproduced the stability and flotation behavior predicted by the model. :contentReference[oaicite:1]{index=1}",
         details: [
-          "Firmware optimized for duty-cycled sampling and transmission.",
-          "Feature pipeline: windowing + FFT + bandpower features.",
-          "Field tests: compared signatures across operating regimes."
+          "Flotation & static stability study using Archimedes’ principle and restoring moment analysis; computed draft, capsize angle, and required mass distribution with a Python script",
+          "Material selection using the Ashby method with performance indices combining stiffness/strength, CO₂ impact, water resistance, recyclability, and cost; identified larch wood as the most relevant candidate",
+          "Structural sizing and verification in CAD (SolidWorks), including Von Mises stress checks against the selected material’s elastic limit under realistic loads (weight, wind, admissible floor loads)",
+          "Habitability and energy-use assessment (space planning + sobriety measures); evaluated energy supply options and feasibility constraints for on-board renewables",
+          "Life Cycle Assessment (LCA) using Granta EduPack comparing a concrete baseline vs. a larch-wood design; quantified key drivers and validated the low-carbon material choice",
+          "Prototype & validation: early 3D-printed model tests (ballast vs. no ballast) to validate stability assumptions, then fabrication of a detailed 1:100 prototype (laser cutting, 3D printing, waterjet ballast) and experimental confirmation of predicted behavior"
         ],
-        tags: ["Laser cutting", "3D printing"],
+        tags: ["Laser cutting", "3D printing", "CAD"],
         cover: "assets/floating-building/WhatsApp Image 2026-02-03 at 15.12.29 (2).jpeg",
         gallery: [
-          { src: "assets/projects/vibration-node/01.jpg", alt: "Node enclosure", caption: "Enclosure + mounting setup." }
+          { src: "assets/floating-building/WhatsApp Image 2026-02-03 at 15.12.29 (2).jpeg", alt: "Finished prototype", caption: "Finished prototype" },
+          { src: "assets/floating-building/WhatsApp Image 2026-02-03 at 15.12.28 (6).jpeg", alt: "Finished poster", caption: "Poster presenting our project to the jury" },
+          { src: "assets/floating-building/Capture d'écran 2026-02-10 090305.png", alt: "Python stability simulation", caption: "Python stability simulation and mass repartition prediction" }
         ],
         links: [
-          { label: "Repository", href: "https://github.com/yourhandle/vibration-node", primary: true }
+          { label: "Project report", href: "assets/floating-building/MURE_BENAICHA_Rapport_PST.pdf", primary: true }
         ]
       },
       {
-        title: "ACEIMI's President",
-        date: "2024 - 2025",
-        short: "Optimization of an engine cowling hinge to reduce environmental impact, weight, and overall cost.",
-        overview: "This competition, organized by EUROAVIA in partnership with ANSYS, gave my three teammates and me the opportunity to strengthen our life cycle assessment (LCA) skills and explore ANSYS optimization tools. We had 48 hours to propose the best possible redesign of the part. We won the ANSYS challenge and advanced to the final in Croatia, where we competed against the winners of the other challenges. We finished second overall in the final phase.",
+        title: "ACEIMI — Co-President",
+        date: "2024 – 2025",
+        short: "Promoting Moroccan and African cultural heritage at INSA Lyon.",
+        overview: "During my term as Co-President of ACEIMI (the Association of Moroccan Students and Researchers at INSA), I organized multiple events to promote Moroccan culture and heritage within the student community. These initiatives ranged from small workshops to larger festive events. We also collaborated with partners such as P&G Morocco and VINCI Energies Africa to highlight internship opportunities across the African continent.",
         details: [
-          "Topology optimization using ANSYS Discovery",
-          "Parametric optimization using ANSYS optiSLang",
-          "Stress analysis using ANSYS Mechanical",
-          "Material selection and life cycle assessment (LCA) using ANSYS Granta EduPack"
+          "Reached 300+ students through cultural and networking events",
+          "Managed a budget of nearly €10,000",
+          "Organized networking and recruitment events to promote internships in Morocco and across Africa and to showcase a different job market",
+          "Produced alumni podcast episodes featuring INSA Lyon graduates to inspire the next generation"
         ],
-        tags: ["Life Cycle Analysis", "Simulation"],
+        tags: ["Association", "Leadership", "Event Organization", "Partnerships"],
         cover: "assets/aceimi/WhatsApp Image 2026-02-09 at 17.43.15 (1).jpeg",
         gallery: [
-          { src: "assets/Ideathon 2024/me-presenting.jpeg", alt: "Me & my team presenting to the jury", caption: "Me & my team presenting to the jury in Toulouse" },
-          { src: "assets/Ideathon 2024/Capture d'écran 2024-12-04 140930.png", alt: "Comparison & Results", caption: "Before / After optimization in phase 1" },
-          { src: "assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png", alt: "Optimized part", caption: "Stress test on the optimized part in phase 2" },
-          { src: "assets/Ideathon 2024/WhatsApp Image 2026-02-03 at 15.17.13.jpeg", alt: "Photo with my team", caption: "Photo with my team" },
-          { src: "assets/Ideathon 2024/WhatsApp Image 2026-02-03 at 15.17.13 all.jpeg", alt: "Photo with all the participants", caption: "Photo with all the participants" }
+          { src: "assets/aceimi/WhatsApp Image 2026-02-09 at 17.43.15 (1).jpeg", alt: "Group photo after our first networking event", caption: "Group photo after our first networking event" },
+          { src: "assets/aceimi/WhatsApp Image 2026-02-09 at 17.43.15.jpeg", alt: "Second networking event", caption: "VINCI Energies Africa returning for a second event in under one year" }
         ],
         links: [
-          { label: "Official competition website", href: "https://ideathon.euroavia.eu/", primary: true }
         ]
       },
       {
@@ -814,7 +820,7 @@
           "Managed workshop production scheduling and programmed the CNC lathe",
           "Led project coordination across multiple phases, including planning, task allocation, and handling unexpected issues and delays"
         ],
-        tags: ["CAD", "Machining", "3D printing", "Management"],
+        tags: ["CAD", "Machining", "3D printing", "Project Management"],
         cover: "assets/3-axis-milling/WhatsApp Image 2026-01-28 at 08.47.08.jpeg",
         gallery: [
           { src: "assets/3-axis-milling/WhatsApp Image 2026-01-28 at 08.55.24.jpeg", alt: "Me leading a design review meeting", caption: "Leading a design review meeting" },
