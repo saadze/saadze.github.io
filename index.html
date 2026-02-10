@@ -467,6 +467,71 @@
     }
 
     .ico{width:16px; height:16px; opacity:.9}
+    
+    /* ===== Lightbox (zoom image) ===== */
+    .gallery img { cursor: zoom-in; }
+
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      display: none;
+      z-index: 2000; /* au-dessus du modal */
+    }
+    .lightbox.open{ display:block; }
+
+    .lightbox-backdrop{
+      position:absolute; inset:0;
+      background: rgba(0,0,0,.70);
+      backdrop-filter: blur(8px);
+    }
+
+    .lightbox-panel{
+      position: relative;
+      width: min(1100px, calc(100vw - 24px));
+      height: min(92vh, calc(100vh - 24px));
+      margin: 12px auto;
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 16px;
+    }
+
+    .lightbox-img{
+      max-width: 100%;
+      max-height: calc(92vh - 120px);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      object-fit: contain;
+      background: rgba(255,255,255,.04);
+    }
+
+    .lightbox-caption{
+      color: var(--muted);
+      font-size: .95rem;
+      text-align: center;
+      max-width: 900px;
+    }
+
+    .lightbox-close{
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      border-radius: 14px;
+      padding: 10px 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .lightbox-close:hover{
+      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.12);
+    }
+
   </style>
 </head>
 
@@ -557,6 +622,16 @@
     </div>
   </div>
 
+  <!-- Lightbox (zoom image) -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-backdrop" id="lightboxBackdrop" aria-hidden="true"></div>
+    <div class="lightbox-panel" role="dialog" aria-modal="true" aria-label="Image preview">
+      <button class="lightbox-close" id="lightboxClose" type="button">Close</button>
+      <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
   <script>
     // =========================
     // EDIT YOUR PROJECTS HERE
@@ -579,55 +654,41 @@
 
         // Images shown in the popup (add as many as you want)
         gallery: [
-          { src: "assets/projects/line-follower/01.jpg", alt: "Robot on track", caption: "Prototype on test track." },
-          { src: "assets/projects/line-follower/02.jpg", alt: "PCB close-up", caption: "Custom PCB revision B." }
+          { src: "assets/Stallion/WhatsApp Image 2026-02-03 at 15.12.27 (1).jpeg", alt: "Stallion", caption: "Stallion in a corner of my room" },
+          { src: "assets/Stallion/WhatsApp Image 2026-02-03 at 15.12.27 (6).jpeg", alt: "Selfie with the Stallion", caption: "Selfie with the Stallion" }
         ],
 
         // Buttons inside the modal
         links: [
-          { label: "Repository", href: "https://github.com/yourhandle/line-follower", primary: true },
-          { label: "Report", href: "assets/projects/line-follower/report.pdf" }
         ]
       },
       {
-        title: "Portable 3-axis milling machine",
-        date: "2023",
-        short: "In a group of 12 people, we wrote the specifications, designed, machined, and assembled a 3 axis desktop milling machine.",
-        overview: "Over 6 months, we worked in 2 competition teams to make the best 3 axis desktop milling machine. Our goal was to come up with the detailed specifications ourselves, design, and build a prototype from scratch. This was one of my favorite projects in the past few years !s",
+        title: "EUROAVIA Lyon — President & Head of Production",
+        date: "2025 – 2026",
+        short: "Founded the technical team, secured 10 partnerships, and managed a €20k budget.",
+        overview: "I joined EUROAVIA Lyon one year after it was founded; at the time, we only had €700 in cash on hand. I then launched our most ambitious initiative: becoming the first French team to participate in the Air Cargo Challenge. To achieve this, we raised significant funding, signed 10 new partnerships, and recruited 40 members to design, prototype, and build two aircraft prototypes.",
         details: [
-          "Defined clear technical specifications for our milling machine, starting from a 1 pager from the project supervisor",
-          "Designed all the parts for turning, machining and sheet metal.",
-          "Handled workshop production scheduling and numerical turning machine programming",
-          "Project coordination and management: I took the lead on managing multiple phases of the projects which required planning, people management, and handling unexpected events / delays."
+          "Organized industry visits for students to Safran Landing Systems, SKF Aerospace, and ANSYS",
+          "As Head of Production, led the manufacturing and integration of both prototypes",
+          "Prototype V1 (Genesis): single electric motor, 2 m wingspan, fully compliant with the competition rules",
+          "Prototype V2: improved iteration over V1 (structure, manufacturability, and overall performance) while remaining fully compliant with competition rules"
         ],
-        tags: ["CAD", "Machining", "3D printing", "Management"],
-        cover: "./assets/FLL/FIRST Lego League.avif",
+        tags: ["Association", "Aircraft Design", "Project Management"],
+        cover: "assets/euroavia/WhatsApp Image 2026-02-10 at 08.34.49.jpeg",
         gallery: [
-          { src: "assets/projects/fem-beam/01.jpg", alt: "Plot of deflection", caption: "Deflection curve vs analytical." },
-          { src: "assets/projects/fem-beam/02.jpg", alt: "CLI screenshot", caption: "CLI workflow for parameter sweeps." }
+          { src: "assets/euroavia/WhatsApp Image 2026-02-10 at 08.34.49.jpeg", alt: "First prototype ready", caption: "First prototype ready" },
+          { src: "assets/euroavia/WhatsApp Image 2026-02-03 at 15.12.27 (2).jpeg", alt: "Laser cutting of wing ribs", caption: "Laser cutting the wing ribs" },
+          { src: "assets/euroavia/WhatsApp Image 2026-02-03 at 15.12.28.jpeg", alt: "Propeller test bench", caption: "Propeller test bench after assembly" },
+          { src: "assets/euroavia/WhatsApp Image 2026-02-03 at 15.12.27 (3).jpeg", alt: "Propeller test bench in wind tunnel", caption: "Propeller test bench used in INSA’s wind tunnel" },
+          { src: "assets/euroavia/WhatsApp Image 2026-02-03 at 15.12.27 (7).jpeg", alt: "Carbon fiber layup for wing skin", caption: "Carbon fiber layup for a wing skin section" },
+          { src: "assets/euroavia/WhatsApp Image 2026-02-03 at 15.12.26.jpeg", alt: "3D printed molds with release film", caption: "3D-printed molds tested with a silicone release film" },
+          { src: "assets/euroavia/WhatsApp Image 2026-02-03 at 15.12.26 (1).jpeg", alt: "Photo with the technical team lead", caption: "Photo with our technical team lead, Martin" },
+          { src: "assets/euroavia/WhatsApp Image 2026-02-10 at 08.34.00 2.jpeg", alt: "Presentation of the final prototype", caption: "Presenting the final prototype to the team" },
+          { src: "assets/euroavia/WhatsApp Image 2026-02-10 at 08.34.00.jpeg", alt: "Team members during the V1 unveiling", caption: "Team members present during the V1 unveiling" }
         ],
         links: [
-          { label: "Repository", href: "https://github.com/yourhandle/fem-beam", primary: true },
-          { label: "Demo", href: "https://yourhandle.github.io/fem-beam-demo/" }
-        ]
-      },
-      {
-        title: "Floating Building",
-        date: "2024",
-        short: "Low-power BLE telemetry + local FFT feature extraction for anomaly detection.",
-        overview: "Built a low-power vibration sensing node for condition monitoring. Implemented local FFT-based feature extraction and BLE telemetry for periodic reporting and diagnostics.",
-        details: [
-          "Firmware optimized for duty-cycled sampling and transmission.",
-          "Feature pipeline: windowing + FFT + bandpower features.",
-          "Field tests: compared signatures across operating regimes."
-        ],
-        tags: ["Laser cutting", "3D printing"],
-        cover: "./assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png",
-        gallery: [
-          { src: "assets/projects/vibration-node/01.jpg", alt: "Node enclosure", caption: "Enclosure + mounting setup." }
-        ],
-        links: [
-          { label: "Repository", href: "https://github.com/yourhandle/vibration-node", primary: true }
+          { label: "Our LinkedIn Page", href: "https://fr.linkedin.com/company/euroavia-lyon", primary: true },
+          { label: "Our Instagram Page", href: "https://www.instagram.com/euroavia.lyon/", primary: true }
         ]
       },
       {
@@ -641,16 +702,18 @@
           "Field tests: compared signatures across operating regimes."
         ],
         tags: ["Arduino", "MATLAB"],
-        cover: "./assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png",
+        cover: "assets/bi-copter/WhatsApp Image 2026-02-03 at 15.12.28 (4).jpeg",
         gallery: [
-          { src: "assets/projects/vibration-node/01.jpg", alt: "Node enclosure", caption: "Enclosure + mounting setup." }
+          { src: "assets/bi-copter/WhatsApp Image 2026-02-03 at 15.12.28 (4).jpeg", alt: "Bi-Copter assembly", caption: "Bi-Copter assembly" },
+          { src: "assets/bi-copter/WhatsApp Image 2026-02-03 at 15.12.28 (2).jpeg", alt: "Live testing of the arm at different angles", caption: "Live testing of the arm at different angles" },
+          { src: "assets/bi-copter/WhatsApp Image 2026-02-03 at 15.12.28 (3).jpeg", alt: "Example of results achieved vs target", caption: "Example of results achieved vs target" }
         ],
         links: [
-          { label: "Repository", href: "https://github.com/yourhandle/vibration-node", primary: true }
+          { label: "C++ Code repository", href: "https://github.com/saadze/gm3_PIAE", primary: true }
         ]
       },
       {
-        title: "Ansys Ideathon winner",
+        title: "Floating Building",
         date: "2024",
         short: "Low-power BLE telemetry + local FFT feature extraction for anomaly detection.",
         overview: "Built a low-power vibration sensing node for condition monitoring. Implemented local FFT-based feature extraction and BLE telemetry for periodic reporting and diagnostics.",
@@ -659,8 +722,8 @@
           "Feature pipeline: windowing + FFT + bandpower features.",
           "Field tests: compared signatures across operating regimes."
         ],
-        tags: ["Life Cycle Analysis", "Simulation"],
-        cover: "./assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png",
+        tags: ["Laser cutting", "3D printing"],
+        cover: "assets/floating-building/WhatsApp Image 2026-02-03 at 15.12.29 (2).jpeg",
         gallery: [
           { src: "assets/projects/vibration-node/01.jpg", alt: "Node enclosure", caption: "Enclosure + mounting setup." }
         ],
@@ -669,22 +732,115 @@
         ]
       },
       {
-        title: "FIRST Lego League winner",
-        date: "2016 - 2019",
-        short: "Low-power BLE telemetry + local FFT feature extraction for anomaly detection.",
-        overview: "Built a low-power vibration sensing node for condition monitoring. Implemented local FFT-based feature extraction and BLE telemetry for periodic reporting and diagnostics.",
+        title: "ACEIMI's President",
+        date: "2024 - 2025",
+        short: "Optimization of an engine cowling hinge to reduce environmental impact, weight, and overall cost.",
+        overview: "This competition, organized by EUROAVIA in partnership with ANSYS, gave my three teammates and me the opportunity to strengthen our life cycle assessment (LCA) skills and explore ANSYS optimization tools. We had 48 hours to propose the best possible redesign of the part. We won the ANSYS challenge and advanced to the final in Croatia, where we competed against the winners of the other challenges. We finished second overall in the final phase.",
         details: [
-          "Firmware optimized for duty-cycled sampling and transmission.",
-          "Feature pipeline: windowing + FFT + bandpower features.",
-          "Field tests: compared signatures across operating regimes."
+          "Topology optimization using ANSYS Discovery",
+          "Parametric optimization using ANSYS optiSLang",
+          "Stress analysis using ANSYS Mechanical",
+          "Material selection and life cycle assessment (LCA) using ANSYS Granta EduPack"
         ],
-        tags: ["Robotics"],
-        cover: "./assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png",
+        tags: ["Life Cycle Analysis", "Simulation"],
+        cover: "assets/aceimi/WhatsApp Image 2026-02-09 at 17.43.15 (1).jpeg",
         gallery: [
-          { src: "assets/projects/vibration-node/01.jpg", alt: "Node enclosure", caption: "Enclosure + mounting setup." }
+          { src: "assets/Ideathon 2024/me-presenting.jpeg", alt: "Me & my team presenting to the jury", caption: "Me & my team presenting to the jury in Toulouse" },
+          { src: "assets/Ideathon 2024/Capture d'écran 2024-12-04 140930.png", alt: "Comparison & Results", caption: "Before / After optimization in phase 1" },
+          { src: "assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png", alt: "Optimized part", caption: "Stress test on the optimized part in phase 2" },
+          { src: "assets/Ideathon 2024/WhatsApp Image 2026-02-03 at 15.17.13.jpeg", alt: "Photo with my team", caption: "Photo with my team" },
+          { src: "assets/Ideathon 2024/WhatsApp Image 2026-02-03 at 15.17.13 all.jpeg", alt: "Photo with all the participants", caption: "Photo with all the participants" }
         ],
         links: [
-          { label: "Repository", href: "https://github.com/yourhandle/vibration-node", primary: true }
+          { label: "Official competition website", href: "https://ideathon.euroavia.eu/", primary: true }
+        ]
+      },
+      {
+        title: "ANSYS Ideathon Winner",
+        date: "2024",
+        short: "Optimization of an engine cowling hinge to reduce environmental impact, weight, and overall cost.",
+        overview: "This competition, organized by EUROAVIA in partnership with ANSYS, gave my three teammates and me the opportunity to strengthen our life cycle assessment (LCA) skills and explore ANSYS optimization tools. We had 48 hours to propose the best possible redesign of the part. We won the ANSYS challenge and advanced to the final in Croatia, where we competed against the winners of the other challenges. We finished second overall in the final phase.",
+        details: [
+          "Topology optimization using ANSYS Discovery",
+          "Parametric optimization using ANSYS optiSLang",
+          "Stress analysis using ANSYS Mechanical",
+          "Material selection and life cycle assessment (LCA) using ANSYS Granta EduPack"
+        ],
+        tags: ["Life Cycle Analysis", "Simulation"],
+        cover: "./assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png",
+        gallery: [
+          { src: "assets/Ideathon 2024/me-presenting.jpeg", alt: "Me & my team presenting to the jury", caption: "Me & my team presenting to the jury in Toulouse" },
+          { src: "assets/Ideathon 2024/Capture d'écran 2024-12-04 140930.png", alt: "Comparison & Results", caption: "Before / After optimization in phase 1" },
+          { src: "assets/Ideathon 2024/Capture d'écran 2024-10-29 002159.png", alt: "Optimized part", caption: "Stress test on the optimized part in phase 2" },
+          { src: "assets/Ideathon 2024/WhatsApp Image 2026-02-03 at 15.17.13.jpeg", alt: "Photo with my team", caption: "Photo with my team" },
+          { src: "assets/Ideathon 2024/WhatsApp Image 2026-02-03 at 15.17.13 all.jpeg", alt: "Photo with all the participants", caption: "Photo with all the participants" }
+        ],
+        links: [
+          { label: "Official competition website", href: "https://ideathon.euroavia.eu/", primary: true }
+        ]
+      },
+      {
+        title: "First Self-Designed Model Airplane",
+        date: "2023",
+        short: "After moving to France to pursue a mechanical engineering degree, I decided to design and build my first aircraft.",
+        overview: "I designed a basic model aircraft in Solid Edge with limited initial knowledge of structural sizing and aerodynamics. I gathered information from online resources and produced my first design iteration. The first three prototypes crashed during early tests due to excessive weight and a negative stability margin. This project became a hands-on learning path in airframe design, iteration, and flight testing.",
+        details: [
+          "Introduction to model aircraft electronics (motor, ESC, servos, RC receiver)",
+          "First large-scale 3D printing project using materials such as LW-PLA and PETG",
+          "Introduction to flight mechanics and flight control fundamentals"
+        ],
+        tags: ["UAV", "3D printing", "Aircraft Design", "CAD"],
+
+        // Image shown on the card (add your own assets)
+        cover: "assets/first plane/WhatsApp Image 2026-01-28 at 08.44.59.jpeg",
+
+        // Images shown in the popup (add as many as you want)
+        gallery: [
+          { src: "assets/first plane/WhatsApp Image 2026-01-28 at 08.45.51.jpeg", alt: "Me & the plane", caption: "Me & the plane before the first test" },
+        ],
+
+        // Buttons inside the modal
+        links: [
+        ]
+      },
+      {
+        title: "Portable 3-Axis Milling Machine",
+        date: "2023",
+        short: "In a 12-person team, we defined the specifications, designed, machined, and assembled a desktop 3-axis milling machine.",
+        overview: "Over six months, we worked in two competing teams to build the best desktop 3-axis milling machine. Our objective was to define detailed specifications, design the machine, and build a prototype from scratch. This was one of my favorite projects of the past few years.",
+        details: [
+          "Defined clear technical specifications for the milling machine, starting from a one-page brief provided by the project supervisor",
+          "Designed parts for turning, machining, and sheet metal fabrication",
+          "Managed workshop production scheduling and programmed the CNC lathe",
+          "Led project coordination across multiple phases, including planning, task allocation, and handling unexpected issues and delays"
+        ],
+        tags: ["CAD", "Machining", "3D printing", "Management"],
+        cover: "assets/3-axis-milling/WhatsApp Image 2026-01-28 at 08.47.08.jpeg",
+        gallery: [
+          { src: "assets/3-axis-milling/WhatsApp Image 2026-01-28 at 08.55.24.jpeg", alt: "Me leading a design review meeting", caption: "Leading a design review meeting" },
+          { src: "assets/3-axis-milling/WhatsApp Image 2026-01-28 at 08.55.24 (3).jpeg", alt: "Team picture at the workshop", caption: "Both teams and the finished milling machines at the workshop" }
+        ],
+        links: [
+        ]
+      },
+      {
+          title: "FIRST LEGO League Winner",
+          date: "2016 – 2019",
+          short: "Member of one of the first FIRST LEGO League (FLL) teams in Morocco and Africa.",
+          overview: "My team and I competed in Morocco’s national FIRST LEGO League events. During this period, I improved my English communication and presentation skills and discovered new STEM disciplines. I progressively took on more responsibility and became team leader after only one year. Over the years, we qualified for international finals and represented Morocco in Houston (Texas), Lebanon, and Egypt. Our yearly challenges focused on topics such as space debris, water scarcity, and urbanism. Team size varied from 5 to 10 members depending on the season.",
+          details: [
+            "Competed in national FLL tournaments and qualified for multiple international finals.",
+            "Led the team (planning, task allocation, and presentation preparation) after one year.",
+            "Built and programmed LEGO-based robots for autonomous mission tasks.",
+            "Developed and presented an innovation project each season aligned with the yearly theme."
+          ],
+        tags: ["Robotics"],
+        cover: "assets/FLL/FIRST Lego League.avif",
+        gallery: [
+          { src: "assets/FLL/FIRST Lego League.avif", alt: "Robot from the competition before 2020", caption: "Robots used in the competition before 2020" }
+        ],
+        links: [
+          { label: "Competition's Wikipedia", href: "https://en.wikipedia.org/wiki/FIRST_Lego_League_Challenge", primary: true }
         ]
       }
     ];
@@ -708,6 +864,34 @@
     const $modalGallery = document.getElementById("modalGallery");
     const $modalScroll = document.getElementById("modalScroll");
 
+    // Lightbox elements
+    const $lightbox = document.getElementById("lightbox");
+    const $lightboxBackdrop = document.getElementById("lightboxBackdrop");
+    const $lightboxClose = document.getElementById("lightboxClose");
+    const $lightboxImg = document.getElementById("lightboxImg");
+    const $lightboxCaption = document.getElementById("lightboxCaption");
+
+    function openLightbox({ src, alt, caption }) {
+      $lightboxImg.src = src;
+      $lightboxImg.alt = alt || "Project image";
+      $lightboxCaption.textContent = caption || "";
+      $lightbox.classList.add("open");
+      $lightbox.setAttribute("aria-hidden", "false");
+      $lightboxClose.focus();
+    }
+
+    function closeLightbox() {
+      $lightbox.classList.remove("open");
+      $lightbox.setAttribute("aria-hidden", "true");
+      // libère l'image (évite flash si tu réouvres vite)
+      $lightboxImg.src = "";
+      $lightboxCaption.textContent = "";
+    }
+
+    $lightboxClose.addEventListener("click", closeLightbox);
+    $lightboxBackdrop.addEventListener("click", closeLightbox);
+
+    // other
     const escapeHtml = (s="") => String(s)
       .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
       .replaceAll('"',"&quot;").replaceAll("'","&#039;");
@@ -795,6 +979,23 @@
             ${img.caption ? `<figcaption>${escapeHtml(img.caption)}</figcaption>` : ""}
           </figure>
         `).join("");
+
+        // Click-to-zoom on gallery images
+        $modalGallery.querySelectorAll("img").forEach((imgEl) => {
+          imgEl.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const figure = imgEl.closest("figure");
+            const captionEl = figure ? figure.querySelector("figcaption") : null;
+
+            openLightbox({
+              src: imgEl.getAttribute("src"),
+              alt: imgEl.getAttribute("alt"),
+              caption: captionEl ? captionEl.textContent : ""
+            });
+          });
+        });
+
       } else {
         $modalGalleryWrap.style.display = "none";
         $modalGallery.innerHTML = "";
@@ -824,8 +1025,17 @@
     $modalClose.addEventListener("click", closeModal);
     $modalBackdrop.addEventListener("click", closeModal);
     window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && $modal.classList.contains("open")) closeModal();
+      if (e.key !== "Escape") return;
+
+      if ($lightbox.classList.contains("open")) {
+        closeLightbox();
+        return;
+      }
+      if ($modal.classList.contains("open")) {
+        closeModal();
+      }
     });
+
 
     // =========
     // Grid render
