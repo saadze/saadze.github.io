@@ -702,6 +702,29 @@
         ]
       },
       {
+      title: "Pressure field modeling in an aerostatic thrust bearing",
+      date: "2025",
+      short: "Modeled the pressure distribution in an aerostatic thrust bearing (1D + 2D) and estimated load capacity.",
+      overview: "In this numerical methods mini-project, we computed the pressure field inside an aerostatic thrust bearing as a function of geometry and boundary pressures. I implemented a 1D finite-difference solver and validated it against an analytical solution, then extended the model to 2D to represent multiple injectors, visualize the pressure map, and estimate the bearing load capacity.",
+      details: [
+        "Built and validated a 1D finite-difference model (analytical cross-check and convergence with mesh refinement)",
+        "Extended the approach to a 2D model to represent multiple injectors and visualize the pressure field",
+        "Studied design sensitivities (e.g., injector position / boundary pressures) on the pressure profile",
+        "Estimated the bearing load capacity by integrating the pressure field"
+      ],
+
+        tags: ["Python"],
+        cover: "assets/NUM/Capture d'écran 2026-02-10 205150.png",
+        gallery: [
+          { src: "assets/NUM/Capture d'écran 2026-02-10 205150.png", alt: "Pressure distribution field obtained", caption: "Pressure distribution field obtained" },
+          { src: "assets/NUM/Capture d'écran 2026-02-10 210148.png", alt: "Aerostatic thrust bearing", caption: "Example of an aerostatic thrust bearing" },
+          { src: "assets/NUM/Capture d'écran 2026-02-10 210243.png", alt: "Results compared to analytical solution and evolution of error as a function of number of mesh elements", caption: "Results compared to analytical solution and evolution of error as a function of number of mesh elements" }
+        ],
+        links: [
+          { label: "Project report in French", href: "assets/NUM/Rapport_mini_projet_NUM.pdf", primary: true },
+        ]
+      },
+      {
         title: "Floating Building",
         date: "2024",
         short: "Eco-design feasibility study for a low-carbon floating apartment building.",
